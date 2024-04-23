@@ -1,0 +1,102 @@
+{
+    "domain_name": "vulncorp.lab",
+    "domaincontroller":
+    {
+        "host_name": "DC-01",
+        "default_user":
+        {
+            "user_name": "Administrator",
+            "password": "P@s$w0rd1"
+        },
+        "ip_address": "10.0.0.10",
+        "subnet_mask": "255.255.255.0",
+        "default_gateway": "10.0.0.1",
+        "primary_dns": "127.0.0.1",
+        "secondary_dns": "8.8.8.8",
+        "dsrm_password": "(N0t)4Cr4cK4Bl3D5RM-P@$$w0Rd!",
+        "has_rdp_enabled": true,
+        "mssqlserver": {
+            "service_account": "sqluser",
+            "service_administrator_accounts": [
+                "sqluser", "alice"
+            ]
+        }
+    },
+    "workstations": [
+        {
+            "host_name": "WKST-01",
+            "default_user":
+            {
+                "user_name": "Admin",
+                "password": "P@s$w0rd1"
+            },
+            "ip_address": "10.0.0.100",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.0.0.1",
+            "primary_dns": "10.0.0.10",
+            "secondary_dns": "8.8.8.8",
+            "local_administrators": [
+                "alice"
+            ],
+            "simulate_user_account": "alice",
+            "is_generating_smb_traffic": true
+        },
+        {
+            "host_name": "WKST-02",
+            "default_user":
+            {
+                "user_name": "Admin",
+                "password": "P@s$w0rd1"
+            },
+            "ip_address": "10.0.0.101",
+            "subnet_mask": "255.255.255.0",
+            "default_gateway": "10.0.0.1",
+            "primary_dns": "10.0.0.10",
+            "secondary_dns": "8.8.8.8",
+            "local_administrators": [
+                "alice", "bob"
+            ]
+        }
+    ],
+    "organizational_units": [
+        {
+            "name": "people",
+            "path": "DC=vulncorp,DC=lab"
+        },
+        {
+            "name": "services",
+            "path": "DC=vulncorp,DC=lab"
+        }
+    ],
+    "user_accounts": [
+        {
+            "sam_account_name": "alice",
+            "given_name": "Alice",
+            "surname": "Smith",
+            "password": "someweakpassword",
+            "path": "OU=people,DC=vulncorp,DC=lab",
+            "is_domain_administrator": false,
+            "has_pre_auth_disabled": false
+        },
+        {
+            "sam_account_name": "bob",
+            "given_name": "Bob",
+            "surname": "Jones",
+            "password": "badpassword123",
+            "path": "OU=people,DC=vulncorp,DC=lab",
+            "is_domain_administrator": false,
+            "has_pre_auth_disabled": true
+        }
+    ],
+    "service_accounts": [
+        {
+            "sam_account_name": "sqluser",
+            "name": "sqluser",
+            "password": "p@ssw@rd",
+            "path": "OU=services,DC=vulncorp,DC=lab",
+            "is_domain_administrator": false,
+            "has_pre_auth_disabled": false,
+            "service_principal_name": "MSSQLSvc/DC-01.vulncorp.lab:1433"
+        }
+    ]
+}
