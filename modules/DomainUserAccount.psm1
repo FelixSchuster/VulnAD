@@ -109,9 +109,7 @@ class DomainUserAccount {
 
     [Void] CreateScheduledSetupTask([SetupConfiguration] $SetupConfiguration, [String] $HostName) {
         Write-Host "[*] Creating scheduled setup task '$($SetupConfiguration.ScheduledTaskName)' for '$($this.LogonName)' ..." -ForegroundColor Yellow -BackgroundColor Black
-        $SetupFile = Join-Path $SetupConfiguration.SetupFilesPath $SetupConfiguration.SetupFileName
-        $ConfigurationFile = Join-Path $SetupConfiguration.SetupFilesPath $SetupConfiguration.ConfigurationFileName
-        $Action = New-ScheduledTaskAction -Execute "powershell" -Argument "-ExecutionPolicy Bypass -File $SetupFile $ConfigurationFile $HostName"
+        $Action = New-ScheduledTaskAction -Execute "powershell" -Argument "-ExecutionPolicy Bypass -File $($SetupConfiguration.SetupFile) $($SetupConfiguration.ConfigurationFile) $HostName"
         $Trigger = New-ScheduledTaskTrigger -AtLogOn -User $this.LogonName
         Register-ScheduledTask -Action $Action -Trigger $Trigger -User $this.LogonName -TaskName $SetupConfiguration.ScheduledTaskName -RunLevel Highest
     }

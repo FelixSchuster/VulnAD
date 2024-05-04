@@ -22,32 +22,22 @@ $ActionBeforeRestart = 0
 # path where setup files are to be stored temporarily
 # all users MUST have read and write permissions to this directory
 # the folder will be removed after setup is finished, so this SHOULD be a directory that is either empty or does not exist yet
-$SetupFilesPath = "C:\Users\Public\Setup"
+$SetupFilesPath = "C:\Users\Public\VulnAD"
 #
 # path where scheduled task script files are to be stored
 # all users MUST have read and write permissions to this directory
-$ScheduledTaskScriptsPath = "C:\Users\Public\ScheduledTaskScripts"
+$ScheduledTaskScriptsPath = "C:\Users\Public\VulnAD-Scripts"
 #
 # name of the scheduled task that continues the setup in case of restart
-$ScheduledTaskName = "LabSetup"
+$ScheduledTaskName = "VulnAD"
 #
 # here all the setup registry keys are temporarily stored
-$RegistryPath = "HKLM:\SOFTWARE\LabSetup"
+$RegistryPath = "HKLM:\SOFTWARE\VulnAD"
 #
 # name of the registry key where the current stage of the setup is temporarily stored
-$RegistryKeyStage = "Stage"
+$RegistryKeyStage = "VulnAD-Stage"
 #
 # END OF SETUP CONFIGURATION BLOCK
-
-$SetupConfiguration = New-Object SetupConfiguration
-$SetupConfiguration.SetupFilesPath = $SetupFilesPath
-$SetupConfiguration.ScheduledTaskScriptsPath = $ScheduledTaskScriptsPath
-$SetupConfiguration.SetupFileName = $MyInvocation.MyCommand
-$SetupConfiguration.ConfigurationFileName = $ConfigurationFile.split("\")[-1]
-$SetupConfiguration.ScheduledTaskName = $ScheduledTaskName
-$SetupConfiguration.RegistryPath = $RegistryPath
-$SetupConfiguration.RegistryKeyStage = $RegistryKeyStage
-$SetupConfiguration.ActionBeforeRestart = $ActionBeforeRestart
 
 function StartSetup([String] $HostName, [String] $ConfigurationFile, [SetupConfiguration] $SetupConfiguration) {
     Write-Host "[*] Checking if script is run with administrator privileges ..." -ForegroundColor Yellow -BackgroundColor Black
@@ -115,5 +105,19 @@ Write-Host "  GitHub: github.com/FelixSchuster" -ForegroundColor Blue -Backgroun
 Write-Host ""
 
 Write-Host "[+] Starting setup. The machine will reboot a few times." -ForegroundColor Green -BackgroundColor Black
+
+$SetupConfiguration = New-Object SetupConfiguration
+$SetupConfiguration.SetupFilesPath = $SetupFilesPath
+$SetupConfiguration.ScheduledTaskScriptsPath = $ScheduledTaskScriptsPath
+$SetupConfiguration.SetupFile = $(Join-Path $SetupFilesPath $MyInvocation.MyCommand)
+if (-not $(Test-Path "$($PSScriptRoot)\$($ConfigurationFile.split('\')[-1])")) {
+    # copy config file to script root folder so we dont have to worry about absolute/relative path
+    Copy-Item $ConfigurationFile $PSScriptRoot
+}
+$SetupConfiguration.ConfigurationFile = $(Join-Path $SetupFilesPath $ConfigurationFile.split('\')[-1])
+$SetupConfiguration.ScheduledTaskName = $ScheduledTaskName
+$SetupConfiguration.RegistryPath = $RegistryPath
+$SetupConfiguration.RegistryKeyStage = $RegistryKeyStage
+$SetupConfiguration.ActionBeforeRestart = $ActionBeforeRestart
 
 StartSetup -HostName $HostName -ConfigurationFile $ConfigurationFile -SetupConfiguration $SetupConfiguration
