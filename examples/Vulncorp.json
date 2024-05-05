@@ -38,8 +38,10 @@
             "local_administrators": [
                 "alice"
             ],
-            "simulate_user_account": "alice",
-            "is_generating_smb_traffic": true
+            "simulate_user_account": {
+                "user_name": "alice",
+                "is_generating_smb_traffic": true
+            }
         },
         {
             "host_name": "WKST-02",

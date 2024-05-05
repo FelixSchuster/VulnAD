@@ -18,7 +18,7 @@ Das Modul user_account ist wie in folgender Tabelle dargestellt festgelegt.
 
 ## Modulbeschreibung im JSON-Format
 
-Im JSON-Format wird der Inhalt wie folgt dargestellt.\
+Im JSON-Format wird der Inhalt wie folgt dargestellt.
 
 ```json
 {

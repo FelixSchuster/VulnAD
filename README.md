@@ -8,13 +8,14 @@ So kann beispielsweise der Zugriff auf Fileshares simuliert oder LLMNR Traffic g
 
 **Diese Dokumentation befindet sich derzeit im Aufbau.**
 
-*TODO: GIF einfügen*
+![Demo](./demo.gif)
 
 ## Setup
 ```text
 git clone https://github.com/FelixSchuster/VulnAD
 cd VulnAD
-powershell -ExecutionPolicy bypass .\VulnAD .\<ConfigurationFile>.json <Hostname>
+powershell -ExecutionPolicy Bypass
+.\VulnAD .\<ConfigurationFile>.json <Hostname>
 ```
 
 ## Dokumentation

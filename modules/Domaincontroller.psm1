@@ -70,18 +70,7 @@ class Domaincontroller : BaseComputer {
             # about it. might add an exception for the default domain admin accout later on
             [DomainUserAccount[]] $SqlSysAdminAccounts = $null
             foreach ($ServiceAdministratorAccount in $MachineConfiguration.mssqlserver.service_administrator_accounts) {
-                foreach ($ServiceAccount in $this.ServiceAccounts) {
-                    if ($ServiceAccount.SamAccountName -eq $ServiceAdministratorAccount) {
-                        $SqlSysAdminAccounts += $ServiceAccount
-                        break
-                    }
-                }
-                foreach ($DomainUserAccount in $this.DomainUserAccounts) {
-                    if ($DomainUserAccount.SamAccountName -eq $ServiceAdministratorAccount) {
-                        $SqlSysAdminAccounts += $DomainUserAccount
-                        break
-                    }
-                }
+                $SqlSysAdminAccounts += $this.CreateDomainAccountBySamAccountName($DomainConfiguration, $ServiceAdministratorAccount)
             }
             [ServiceAccount] $SqlSvcAccount = $null
             foreach ($ServiceAccount in $this.ServiceAccounts) {
@@ -200,7 +189,7 @@ class Domaincontroller : BaseComputer {
             $this.CopyScheduledTaskScriptFiles()
             $this.DefaultUser.ChangePassword($this.DefaultUser.Password)
             $this.RenameComputer()
-            $this.SetDnsServers() # can be removed?
+            $this.SetDnsServers()
             $this.SetCurrentStage(1)
             $this.CreateScheduledSetupTaskForDefaultUser()
             $this.EnableDefaultUserAccountAutoLogin()
@@ -208,12 +197,11 @@ class Domaincontroller : BaseComputer {
         } elseif (1 -eq $CurrentStage) {
             $this.InstallActiveDirectoryDomainServices()
             $this.InstallActiveDirectoryCertificateServices()
-            $this.SetDnsServers() # moved here
+            $this.SetDnsServers()
             $this.EnableSetupUserAccountAutoLogin()
             $this.SetCurrentStage(2)
             $this.Restart()
         } elseif (2 -eq $CurrentStage) {
-            # $this.SetDnsServers() # this
             $this.WeakenPasswordPolicy()
             $this.CreateOrganziationalUnits()
             $this.CreateDomainAccountsAndGrantPrivileges()

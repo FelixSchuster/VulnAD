@@ -49,64 +49,54 @@ class BaseComputer {
 
         # simulate user behaviour
         if ($MachineConfiguration.PSobject.Properties.Name.Contains("simulate_user_account")) {
-            foreach ($DomainUserAccountConfiguration in $DomainConfiguration.user_accounts) {
-                if ($MachineConfiguration.simulate_user_account -eq $DomainUserAccountConfiguration.sam_account_name) {
-                    $this.SimulateUserAccount = [DomainUserAccount]::new($DomainUserAccountConfiguration, $this.DomainName)
-                    break
+            if ($MachineConfiguration.simulate_user_account.PSobject.Properties.Name.Contains("user_name")) {
+                $SamAccountName = $MachineConfiguration.simulate_user_account.PSobject.Properties.Name.Contains("user_name")
+                $this.SimulateUserAccount = $this.CreateDomainAccountBySamAccountName($DomainConfiguration, $SamAccountName)
+                if ($MachineConfiguration.simulate_user_account.PSobject.Properties.Name.Contains("browse_fileshares")) {
+                    foreach ($Fileshare in $MachineConfiguration.simulate_user_account.browse_fileshares) {
+                        $this.BrowseFileshares += $Fileshare
+                    }
+                }
+                if ($MachineConfiguration.simulate_user_account.PSobject.Properties.Name.Contains("is_generating_http_traffic")) {
+                    $this.IsGeneratingHttpTraffic = $MachineConfiguration.simulate_user_account.is_generating_http_traffic
+                }
+                if ($MachineConfiguration.simulate_user_account.PSobject.Properties.Name.Contains("is_generating_smb_traffic")) {
+                    $this.IsGeneratingSmbTraffic = $MachineConfiguration.simulate_user_account.is_generating_smb_traffic
                 }
             }
-            foreach ($ServiceAccountConfiguration in $DomainConfiguration.service_accounts) {
-                if ($MachineConfiguration.simulate_user_account -eq $ServiceAccountConfiguration.sam_account_name) {
-                    $this.SimulateUserAccount = [ServiceAccount]::new($ServiceAccountConfiguration, $this.DomainName)
-                    break
-                }
-            }
         }
-        if ($MachineConfiguration.PSobject.Properties.Name.Contains("browse_fileshares")) {
-            foreach ($Fileshare in $MachineConfiguration.browse_fileshares) {
-                $this.BrowseFileshares += $Fileshare
-            }
-        }
-        if ($MachineConfiguration.PSobject.Properties.Name.Contains("is_generating_http_traffic")) {
-            $this.IsGeneratingHttpTraffic = $MachineConfiguration.is_generating_http_traffic
-        }
-        if ($MachineConfiguration.PSobject.Properties.Name.Contains("is_generating_smb_traffic")) {
-            $this.IsGeneratingSmbTraffic = $MachineConfiguration.is_generating_smb_traffic
-        }
+
+        # enable rdp
         if ($MachineConfiguration.PSobject.Properties.Name.Contains("has_rdp_enabled")) {
             $this.HasRdpEnabled = $MachineConfiguration.has_rdp_enabled
         }
 
         # logged in users configuration
         foreach ($LoggedInUserSamAccountName in $MachineConfiguration.logged_in_users) {
-            foreach ($DomainUserAccountConfiguration in $DomainConfiguration.user_accounts) {
-                if ($LoggedInUserSamAccountName -eq $DomainUserAccountConfiguration.sam_account_name) {
-                    $this.LoggedInUsers += [DomainUserAccount]::new($DomainUserAccountConfiguration, $this.DomainName)
-                }
-            }
-            foreach ($ServiceAccountConfiguration in $DomainConfiguration.service_accounts) {
-                if ($LoggedInUSersamAccountName -eq $ServiceAccountConfiguration.sam_account_name) {
-                    $this.LoggedInUsers += [ServiceAccount]::new($ServiceAccountConfiguration, $this.DomainName)
-                }
-            }
+            $this.LoggedInUsers += $this.CreateDomainAccountBySamAccountName($DomainConfiguration, $LoggedInUserSamAccountName)
         }
 
         # local administrators configuration
         foreach ($LocalAdministratorSamAccountName in $MachineConfiguration.local_administrators) {
-            foreach ($DomainUserAccountConfiguration in $DomainConfiguration.user_accounts) {
-                if ($LocalAdministratorSamAccountName -eq $DomainUserAccountConfiguration.sam_account_name) {
-                    $this.LocalAdministrators += [DomainUserAccount]::new($DomainUserAccountConfiguration, $this.DomainName)
-                }
-            }
-            foreach ($ServiceAccountConfiguration in $DomainConfiguration.service_accounts) {
-                if ($LocalAdministratorSamAccountName -eq $ServiceAccountConfiguration.sam_account_name) {
-                    $this.LocalAdministrators += [ServiceAccount]::new($ServiceAccountConfiguration, $this.DomainName)
-                }
-            }
+            $this.LoggedInUsers += $this.CreateDomainAccountBySamAccountName($DomainConfiguration, $LocalAdministratorSamAccountName)
         }
 
         # setup configuration
         $this.SetupConfiguration = $SetupConfiguration
+    }
+
+    [DomainUserAccount] CreateDomainAccountBySamAccountName($DomainConfiguration, $SamAccountName) {
+        foreach ($DomainUserAccountConfiguration in $DomainConfiguration.user_accounts) {
+            if ($SamAccountName -eq $DomainUserAccountConfiguration.sam_account_name) {
+                return [DomainUserAccount]::new($DomainUserAccountConfiguration, $this.DomainName)
+            }
+        }
+        foreach ($ServiceAccountConfiguration in $DomainConfiguration.service_accounts) {
+            if ($SamAccountName -eq $ServiceAccountConfiguration.sam_account_name) {
+                return [ServiceAccount]::new($ServiceAccountConfiguration, $this.DomainName)
+            }
+        }
+        return $null
     }
 
     [Void] RenameComputer() {

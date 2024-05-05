@@ -19,14 +19,11 @@ Das Modul workstation ist wie in folgender Tabelle dargestellt festgelegt.
 |has_rdp_enabled     |Nein    |Option für das automatisierte Starten von RDP.<br>Wenn true: Zusätzlich wird der RestrictedAdmin Mode deaktiviert, um Pass-The-Hash Angriffe zu ermöglichen.|Boolean              |`true`/`false`               |
 |logged_in_users     |Nein    |Domainaccounts, die sich einmal auf dieser Box angemeldet haben.<br>Kann genutzt werden, um Passwort-Hashes im Cache der Box zu hinterlassen. Unter *logged_in_users* oder *local_administrators* muss mindestens ein Account hinterlegt sein, um das Setup zu ermöglichen. Wird ein Account für das Setup genutzt, der keine Administratorberechtigungen besitzt, werden diesem während der Dauer des Setups die entsprechenden Berechtigungen vergeben und anschließend wieder entzogen.  Die Accountnamen müssen als [user_account](./user_account.md) oder [service_account](./service_account.md) hinterlegt sein.|String[]             |`"alice", "bob", "charlie"`|
 |local_administrators|Nein    |Domainaccounts, für die lokale Administratorberechtigungen konfiguriert werden sollen.<br>Hier eingetragene Accounts hinterlassen Passwort-Hashes im Cache der Box. Unter *logged_in_users* oder *local_administrators* muss mindestens ein Account hinterlegt sein, um das Setup zu ermöglichen. Die Accountnamen müssen als [user_account](./user_account.md) oder [service_account](./service_account.md) hinterlegt sein.|String[]             |`"alice", "bob"`           |
-|simulate_user_account|Nein    |Domainaccount, für den Aktivitäten simuliert werden sollen.<br>Für diesen Account wird automatisiertes Anmelden am entsprechenden Host konfiguriert. Siehe *browse_fileshares*, *is_generating_smb_traffic* und *is_generating_http_traffic* für Beispiele von Aktivitäten, die simuliert werden können. Der Accountname muss als [user_account](./user_account.md) oder [service_account](./service_account.md) hinterlegt sein.|String               |`"alice"`                  |
-|browse_fileshares   |Nein    |Fileshares, die von einem Domainaccount besucht werden sollen.<br>Kann genutzt werden, um URL-File-Attacks nachzustellen. Setzt einen Eintrag unter *simulate_user_account* voraus. Der Fileshare muss unter fileshares am Domain Controller existieren.|String[]             |`"\\\\DC-01\\Share1"`      |
-|is_generating_smb_traffic|Nein    |Ist die Option aktiviert, wird der Fileshare `\\DC-1` gemapped.<br>Kann genutzt werden, um LLMNR-Poisoning und NTLM-Relaying nachzustellen, wenn der Fileshare nicht im Netzwerk existiert. Setzt einen Eintrag unter *simulate_user_account* voraus.|Boolean              |`true`/`false`               |
-|is_generating_http_traffic|Nein    |Ist die Option aktiviert, wird ein nicht existierender Hostname mittels IPv6 aufgelöst.<br>Kann genutzt werden, um Man-In-The-Middle Angriffe nachzustellen, wenn IPv6 im Netzwerk aktiviert, aber nicht konfiguriert ist. Setzt einen Eintrag unter *simulate_user_account* voraus. Das Feature befindet sich in Entwicklung und kann derzeit noch nicht verlässlich genutzt werden.|Boolean              |`true`/`false`               |
+|simulate_user_account|Nein    |Domainaccount, für den Aktivitäten simuliert werden sollen.|simulate_user_account               |Siehe [simulate_user_account](./simulate_user_account.md)               |
 
 ## Modulbeschreibung im JSON-Format
 
-Im JSON-Format wird der Inhalt wie folgt dargestellt.\
+Im JSON-Format wird der Inhalt wie folgt dargestellt.
 
 ```json
 {
@@ -47,12 +44,9 @@ Im JSON-Format wird der Inhalt wie folgt dargestellt.\
     "local_administrators": [
         "alice", "bob"
     ],
-    "simulate_user_account": "alice",
-    "browse_fileshares": [
-        "\\\\DC-01\\Share1"
-    ],
-    "is_generating_smb_traffic": true,
-    "is_generating_http_traffic": true  
+    "simulate_user_account": {
+        ...
+    }
 }
 ```
 

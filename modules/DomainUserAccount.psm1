@@ -119,7 +119,7 @@ class DomainUserAccount {
         $ScriptFile = Join-Path $ScriptPath "FileshareBrowser.ps1"
         $Action = New-ScheduledTaskAction -Execute "powershell" -Argument "-ExecutionPolicy Bypass -File $ScriptFile $RemotePath"
         $Trigger = New-ScheduledTaskTrigger -AtLogOn -User $this.LogonName
-        $TaskName = "Browse Fileshare $RemotePath".replace('\','_') # apparently '\' is not allowed in the task name
+        $TaskName = "Browse Fileshare $RemotePath".replace('\','_').replace(':','_') # apparently '\' and ':' are not allowed in the task name
         Register-ScheduledTask -Action $Action -Trigger $Trigger -User $this.LogonName -TaskName $TaskName -RunLevel Highest
     }
 
