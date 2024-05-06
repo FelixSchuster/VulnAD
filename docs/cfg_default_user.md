@@ -1,10 +1,8 @@
-# Dokumentation der Konfigurationsdatei: Modul default_user
+# Modul default_user
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./configuration_root.md).
+Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
 
 ## Modulbeschreibung in Tabellenform
-
-Das Modul default_user ist wie in folgender Tabelle dargestellt festgelegt.
 
 |Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
 |--------------------|--------|-------------------------------------------|---------------------|-------------------------|
@@ -13,13 +11,9 @@ Das Modul default_user ist wie in folgender Tabelle dargestellt festgelegt.
 
 ## Modulbeschreibung im JSON-Format
 
-Im JSON-Format wird der Inhalt wie folgt dargestellt.
-
 ```json
 {
     "user_name": "Admin",
     "password": "Admin-P@ssword"
 }
 ```
-
-Beispiele für mit `...` markierte Inhalte sind in der Dokumentation des jeweiligen Moduls zu finden.

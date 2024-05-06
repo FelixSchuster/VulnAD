@@ -1,15 +1,13 @@
-# Dokumentation der Konfigurationsdatei: Modul domaincontroller
+# Modul domaincontroller
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./configuration_root.md).
+Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
 
 ## Modulbeschreibung in Tabellenform
-
-Das Modul domaincontroller ist wie in folgender Tabelle dargestellt festgelegt.
 
 |Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
 |--------------------|--------|-------------------------------------------|---------------------|-------------------------|
 |host_name           |Ja      |Der zu vergebende Hostname.                |String               |`"DC-01"`                  |
-|default_user        |Ja      |Die zu vergebenden Credentials des lokalen Accounts.|default_user         |Siehe [default_user](./default_user.md)       |
+|default_user        |Ja      |Die zu vergebenden Credentials des lokalen Accounts.|default_user         |Siehe [default_user](./cfg_default_user.md)       |
 |network_interface   |Nein    |Das Netzwerkinterface, das für das Setup genutzt werden soll.<br>Default: `"Ethernet"`|String               |`"Ethernet"`               |
 |ip_address          |Ja      |Die zu vergebende IP-Adresse.              |String               |`"10.0.0.10"`              |
 |subnet_mask         |Ja      |Die Subnetzmaske des Netzwerkes.           |String               |`"255.255.255.0"`          |
@@ -19,12 +17,10 @@ Das Modul domaincontroller ist wie in folgender Tabelle dargestellt festgelegt.
 |dsrm_password       |Ja      |Das zu setzende DSRM-Passwort für die Domäne.|String               |`"DSRM-P@ssword"`          |
 |has_rdp_enabled     |Nein    |Option für das automatisierte Starten von RDP.<br>Wenn true: Zusätzlich wird der RestrictedAdmin Mode deaktiviert, um Pass-The-Hash Angriffe zu ermöglichen.|Boolean              |`true`/`false`               |
 |has_iis_installed   |Nein    |Option für das automatisierte Installieren des IIS-Webservers.<br>Wenn true: Der Webserver wird auf Port 80 gehostet. Die Dateien im Ordner `.\Website\*` werden gehostet.|Boolean              |`true`/`false`               |
-|fileshares          |Nein    |Option für das automatisierte Hosten von Fileshares.<br>Wenn angegeben: Die Dateien im Ordner `.\Fileshares\<Sharename>\*` werden geteilt. Per Group Policy verbinden sich alle Workstations in der Domäne mit den angegebenen Fileshares. Derzeit ist es nicht möglich, ACLs zu erstellen, alle Konten besitzen Zugriff auf die gehostetet Fileshares.|fileshare[]          |Siehe [fileshare](./fileshare.md)          |
-|mssqlserver         |Nein    |Option für das automatisierte Hosten eines MSSQL-Servers.<br>Wenn angegeben: Eine MSSQL-Server Instanz wird auf Port 1433 gehostet.|mssqlserver          |Siehe [mssqlserver](./mssqlserver.md)        |
+|fileshares          |Nein    |Option für das automatisierte Hosten von Fileshares.<br>Wenn angegeben: Die Dateien im Ordner `.\Fileshares\<Sharename>\*` werden geteilt. Per Group Policy verbinden sich alle Workstations in der Domäne mit den angegebenen Fileshares. Derzeit ist es nicht möglich, ACLs zu erstellen, alle Konten besitzen Zugriff auf die gehostetet Fileshares.|fileshare[]          |Siehe [fileshare](./cfg_fileshare.md)          |
+|mssqlserver         |Nein    |Option für das automatisierte Hosten eines MSSQL-Servers.<br>Wenn angegeben: Eine MSSQL-Server Instanz wird auf Port 1433 gehostet.|mssqlserver          |Siehe [mssqlserver](./cfg_mssqlserver.md)        |
 
 ## Modulbeschreibung im JSON-Format
-
-Im JSON-Format wird der Inhalt wie folgt dargestellt.
 
 ```json
 {

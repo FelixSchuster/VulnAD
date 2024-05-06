@@ -1,10 +1,8 @@
-# Dokumentation der Konfigurationsdatei: Modul organizational_unit
+# Modul organizational_unit
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./configuration_root.md).
+Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
 
 ## Modulbeschreibung in Tabellenform
-
-Das Modul organizational_unit ist wie in folgender Tabelle dargestellt festgelegt.
 
 |Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
 |--------------------|--------|-------------------------------------------|---------------------|-------------------------|
@@ -13,13 +11,9 @@ Das Modul organizational_unit ist wie in folgender Tabelle dargestellt festgeleg
 
 ## Modulbeschreibung im JSON-Format
 
-Im JSON-Format wird der Inhalt wie folgt dargestellt.
-
 ```json
 {
     "name": "people",
     "path": "DC=vulncorp,DC=lab"
 }
 ```
-
-Beispiele für mit `...` markierte Inhalte sind in der Dokumentation des jeweiligen Moduls zu finden.

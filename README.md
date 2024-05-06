@@ -6,29 +6,28 @@ Zusätzlich installiert das Tool die Active Directory Domain Services am Domain 
 VulnAD ist außerdem in der Lage, mit Hilfe von Scheduled Tasks Personenverhalten zu simulieren.
 So kann beispielsweise der Zugriff auf Fileshares simuliert oder LLMNR Traffic generiert werden, was die Nachstellung diverser Angriffe ermöglicht.
 
-**Diese Dokumentation befindet sich derzeit im Aufbau.**
-
-![Demo](./demo.gif)
+![Demo](./docs/pics/demo.gif)
 
 ## Setup
+VulnAD setzt ein NAT-Netzwerk für die Active Directory Umgebung voraus.
+Wie ein NAT-Netzwerk in VirtualBox konfiguriert werden kann, wird [hier](./docs/vbox_nat.md) beschrieben.
+Zusätzlich sind die Windows-Hosts aufzusetzen, die in die Umgebung eingebunden werden sollen.
+
+Anschließend kann VulnAD wie folgt gestartet werden:
+
 ```text
 git clone https://github.com/FelixSchuster/VulnAD
 cd VulnAD
 powershell -ExecutionPolicy Bypass
-.\VulnAD .\<ConfigurationFile>.json <Hostname>
+.\VulnAD <ConfigurationFile> <HostName>
 ```
 
 ## Dokumentation
 
-*TODO: Erstellen der VMs dokumentieren*
-
-VulnAD konfiguriert die Domäne anhand einer JSON-Konfigurationsdatei, der Aufbau ist [hier](./docs/configuration_root.md) dokumentiert.\
+VulnAD konfiguriert die Domäne anhand einer JSON-Konfigurationsdatei, der Aufbau ist [hier](./docs/cfg_root.md) dokumentiert.\
 Beispiele für valide Konfigurationsdateien sind im `examples`-Ordner zu finden.
 
-*TODO: action_bevore_restart dokumentieren*
-
 ## TODO
-- Dokumentation fertigstellen
 - Übersetzung der Dokumentation ins Englische
 - Umbenennen der lokalen Accountnamen zu Beginn des Setups
 - Examples und Writeups bereitstellen
