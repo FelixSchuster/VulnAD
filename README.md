@@ -14,10 +14,7 @@ powershell -ExecutionPolicy Bypass
 .\VulnAD <ConfigurationFile> <HostName>
 ```
 
-## Dokumentation
-
-VulnAD konfiguriert die Domäne anhand einer JSON-Konfigurationsdatei, der Aufbau ist  dokumentiert.\
-Beispiele für valide Konfigurationsdateien sind im `examples`-Ordner zu finden.
+## Documentation
 
 VulnAD configures the domain based on a JSON configuration file, the structure of which is documented [here](./docs/cfg_root.md).\
 Examples of valid configuration files can be found in the examples folder.
