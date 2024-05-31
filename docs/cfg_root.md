@@ -1,20 +1,7 @@
-# Grundstruktur der Konfigurationsdatei
+# Documentation of the configuration file
 
-In dieser Dokumentation wird beschrieben, wie Konfigurationdateien für VulnAD aufzubauen sind.
-Beispiele für valide Konfigurationsdateien sind im `examples`-Ordner zu finden.
-
-## Grundstruktur in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|domain_name         |Ja      |Der zu vergebende Domainname.              |String               |`"vulncorp.lab"`           |
-|domaincontroller    |Ja      |Konfiguration für den Domaincontroller.    |domaincontroller     |Siehe [domaincontroller](./cfg_domaincontroller.md)   |
-|workstations        |Ja      |Konfiguration für die Workstations.        |workstation[]        |Siehe [workstation](./cfg_workstation.md)        |
-|organizational_units|Nein    |Konfiguration für die Organizational Units.|organizational_unit[]|Siehe [organizational_unit](./cfg_organizational_unit.md)|
-|user_accounts       |Ja      |Konfiguration für die User Accounts.       |user_account[]       |Siehe [user_account](./cfg_user_account.md)       |
-|service_accounts    |Nein    |Konfiguration für die Service Accounts.    |service_account[]    |Siehe [service_account](./cfg_service_account.md)    |
-
-## Grundstruktur im JSON-Format
+This documentation describes how to structure configuration files for VulnAD.
+Examples of valid configuration files can be found in the `examples` folder.
 
 ```json
 {
@@ -37,4 +24,11 @@ Beispiele für valide Konfigurationsdateien sind im `examples`-Ordner zu finden.
 }
 ```
 
-Beispiele für mit `...` markierte Inhalte sind in der Dokumentation des jeweiligen Moduls zu finden.
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|domain_name         |Yes      |The domain name to be assigned.              |String               |`"vulncorp.lab"`           |
+|domaincontroller    |Yes      |Configuration for the domain controller.    |domaincontroller     |See [domaincontroller](./cfg_domaincontroller.md)   |
+|workstations        |Yes      |Configuration for the workstations.        |workstation[]        |See [workstation](./cfg_workstation.md)        |
+|organizational_units|No    |Configuration for the Organizational Units.|organizational_unit[]|See [organizational_unit](./cfg_organizational_unit.md)|
+|user_accounts       |Yes      |Configuration for the domain user accounts.       |user_account[]       |See [user_account](./cfg_user_account.md)       |
+|service_accounts    |No    |Configuration for the service accounts.    |service_account[]    |See [service_account](./cfg_service_account.md)    |

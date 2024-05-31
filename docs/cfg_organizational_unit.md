@@ -1,15 +1,6 @@
-# Modul organizational_unit
+# organizational_unit module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|name                |Ja      |Der zu vergebende Name der Organizational Unit.|String               |`"people"`                 |
-|path                |Ja      |Der Pfad der Organizational Unit.          |String               |`"DC=vulncorp,DC=lab"`     |
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -17,3 +8,8 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
     "path": "DC=vulncorp,DC=lab"
 }
 ```
+
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|name                |Yes      |The name to be assigned to the Organizational Unit.|String               |`"people"`                 |
+|path                |Yes      |The path of the Organizational Unit.          |String               |`"DC=vulncorp,DC=lab"`     |

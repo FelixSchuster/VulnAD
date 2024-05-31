@@ -1,15 +1,6 @@
-# Modul default_user
+# default_user module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|user_name           |Ja      |Der Accountname für den lokalen Account.<br>Dieses Feld wird derzeit ignoriert, stattdessen wird der Accountname des  Accounts, mit dem das Setup gestartet wird, übernommen.|String               |`"Admin"`                  |
-|password            |Ja      |Das Passwort für den lokalen Account.<br>Das Passwort muss nicht dem aktuellen Passwort des Accounts entsprechen und wird im Laufe des Setups auf das hier angegebene Passwort geändert.|String               |`"Admin-P@ssword"`         |
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -17,3 +8,8 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
     "password": "Admin-P@ssword"
 }
 ```
+
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|user_name           |Yes      |The account name for the local account.<br>This field is currently ignored; instead, the account name of the account used to initiate the setup will be taken over.|String               |`"Admin"`                  |
+|password            |Yes      |The password for the local account.<br>The password does not need to match the current password of the account and will be changed to the password specified here during the setup.|String               |`"Admin-P@ssword"`         |

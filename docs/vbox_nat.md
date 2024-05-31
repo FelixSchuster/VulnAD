@@ -1,4 +1,4 @@
-# Konfiguration eines VirtualBox NAT-Netzwerkes
+# Configuring a VirtualBox NAT-Network
 
 ![vbox_nat_01](./pics/vbox_nat_01.png)
 

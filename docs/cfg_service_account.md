@@ -1,20 +1,6 @@
-# Modul service_account
+# service_account module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|sam_account_name    |Ja      |Der zu vergebende SamAccountName für den  Account.|String               |`"sqluser"`                |
-|name                |Ja      |Der zu vergebende Name für den  Account.   |String               |`"sqluser"`                |
-|password            |Ja      |Das zu vergebende Passwort für den  Account.|String               |`"sqluser-P@ssword"`       |
-|path                |Ja      |Die Organizational Unit, der der Account angehören sein soll.<br>Die OU muss als [organizational_unit](./cfg_organizational_unit.md) hinterlegt sein.|String               |`"OU=services,DC=vulncorp,DC=lab"`|
-|is_domain_administrator|Nein    |Option für das Vergeben von Domainadmin-Berechtigungen.|Boolean              |`true`/`false`               |
-|has_pre_auth_disabled|Nein    |Option für das Deaktivieren der Kerberos Pre-Authentication.<br>Kann genutzt werden, um AS-REP Roasting Angriffe nachzustellen.|Boolean              |`true`/`false`               |
-|service_principal_name|Ja      |Der zu vergebende ServicePrincipalName für den Account.|String               |`"MSSQLSvc/DC-01.vulncorp.lab:1433"`|
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -27,3 +13,13 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
     "service_principal_name": "MSSQLSvc/DC-01.vulncorp.lab:1433"
 }
 ```
+
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|sam_account_name    |Yes      |The SamAccountName to be assigned to the account.|String               |`"sqluser"`                |
+|name                |Yes      |The name to be assigned to the account.   |String               |`"sqluser"`                |
+|password            |Yes      |The password to be assigned to the account.|String               |`"sqluser-P@ssword"`       |
+|path                |Yes      |The organizational unit to which the account should belong. The OU must be specified as [organizational_unit](./cfg_organizational_unit.md).|String               |`"OU=services,DC=vulncorp,DC=lab"`|
+|is_domain_administrator|No    |Option for assigning Domain Admin permissions.|Boolean              |`true`/`false`               |
+|has_pre_auth_disabled|No    |Option for disabling Kerberos pre-authentication.<br>Can be used to simulate AS-REP Roasting attacks.|Boolean              |`true`/`false`               |
+|service_principal_name|Yes      |The ServicePrincipalName to be assigned to the account.|String               |`"MSSQLSvc/DC-01.vulncorp.lab:1433"`|

@@ -1,16 +1,6 @@
-# Modul fileshare
+# fileshare module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|name                |Ja      |Name des zu hostenden Fileshares.          |String               |`"Share1"`                 |
-|path                |Ja      |Lokaler Speicherort der zu hostenden Dateien.|String               |`"C:\\Shares\\Share1"`  |
-|drive               |Ja      |Das Laufwerk, auf das der Fileshare gemapped werden soll.|String               |`"Z"`                      |
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -19,3 +9,9 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
     "drive": "Z"
 }
 ```
+
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|name                |Yes      |Name of the file share to be hosted.          |String               |`"Share1"`                 |
+|path                |Yes      |Local path to the files beeing hosted. |String               |`"C:\\Shares\\Share1"`  |
+|drive               |Yes      |The drive to which the file share should be mapped.|String               |`"Z"`                      |

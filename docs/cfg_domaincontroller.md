@@ -1,26 +1,6 @@
-# Modul domaincontroller
+# domaincontroller module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|host_name           |Ja      |Der zu vergebende Hostname.                |String               |`"DC-01"`                  |
-|default_user        |Ja      |Die zu vergebenden Credentials des lokalen Accounts.|default_user         |Siehe [default_user](./cfg_default_user.md)       |
-|network_interface   |Nein    |Das Netzwerkinterface, das für das Setup genutzt werden soll.<br>Default: `"Ethernet"`|String               |`"Ethernet"`               |
-|ip_address          |Ja      |Die zu vergebende IP-Adresse.              |String               |`"10.0.0.10"`              |
-|subnet_mask         |Ja      |Die Subnetzmaske des Netzwerkes.           |String               |`"255.255.255.0"`          |
-|default_gateway     |Ja      |Das Default Gateway des Netzwerkes.        |String               |`"10.0.0.1"`               |
-|primary_dns         |Ja      |Der primäre DNS-Server.<br>Empfohlen für den DC: `"127.0.0.1"`<br>Empfohlen für die Workstations: IP-Adresse des DCs|String               |`"127.0.0.1"`              |
-|secondary_dns       |Ja      |Der sekundäre DNS-Server.<br>Empfohlen: `"8.8.8.8"`|String               |`"8.8.8.8"`                |
-|dsrm_password       |Ja      |Das zu setzende DSRM-Passwort für die Domäne.|String               |`"DSRM-P@ssword"`          |
-|has_rdp_enabled     |Nein    |Option für das automatisierte Starten von RDP.<br>Wenn true: Zusätzlich wird der RestrictedAdmin Mode deaktiviert, um Pass-The-Hash Angriffe zu ermöglichen.|Boolean              |`true`/`false`               |
-|has_iis_installed   |Nein    |Option für das automatisierte Installieren des IIS-Webservers.<br>Wenn true: Der Webserver wird auf Port 80 gehostet. Die Dateien im Ordner `.\Website\*` werden gehostet.|Boolean              |`true`/`false`               |
-|fileshares          |Nein    |Option für das automatisierte Hosten von Fileshares.<br>Wenn angegeben: Die Dateien im Ordner `.\Fileshares\<Sharename>\*` werden geteilt. Per Group Policy verbinden sich alle Workstations in der Domäne mit den angegebenen Fileshares. Derzeit ist es nicht möglich, ACLs zu erstellen, alle Konten besitzen Zugriff auf die gehostetet Fileshares.|fileshare[]          |Siehe [fileshare](./cfg_fileshare.md)          |
-|mssqlserver         |Nein    |Option für das automatisierte Hosten eines MSSQL-Servers.<br>Wenn angegeben: Eine MSSQL-Server Instanz wird auf Port 1433 gehostet.|mssqlserver          |Siehe [mssqlserver](./cfg_mssqlserver.md)        |
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -46,4 +26,18 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
 }
 ```
 
-Beispiele für mit `...` markierte Inhalte sind in der Dokumentation des jeweiligen Moduls zu finden.
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|host_name           |Yes      |The hostname to be assigned.                |String               |`"DC-01"`                  |
+|default_user        |Yes      |The credentials to be assigned to the local account.|default_user         |See [default_user](./cfg_default_user.md)       |
+|network_interface   |No    |The network interface to be used during the setup.<br>Default: `"Ethernet"`|String               |`"Ethernet"`               |
+|ip_address          |Yes      |The IP address to be assigned.              |String               |`"10.0.0.10"`              |
+|subnet_mask         |Yes      |The subnet mask of the network.           |String               |`"255.255.255.0"`          |
+|default_gateway     |Yes      |The default gateway of the network.        |String               |`"10.0.0.1"`               |
+|primary_dns         |Yes      |The primary DNS server.<br>Recommended: `"127.0.0.1"`|String               |`"127.0.0.1"`              |
+|secondary_dns       |Yes      |The secondary DNS server.<br>Recommended: `"8.8.8.8"`|String               |`"8.8.8.8"`                |
+|dsrm_password       |Yes      |The DSRM (Directory Services Restore Mode) password to be set for the domain.|String               |`"DSRM-P@ssword"`          |
+|has_rdp_enabled     |No    |Option to enable RDP.<br>Additionally, the RestrictedAdmin mode is disabled to enable Pass-The-Hash attacks.|Boolean              |`true`/`false`               |
+|has_iis_installed   |No    |Option for automated installation of the IIS web server.<br>The files in the `.\Website\*` folder will be hosted on port 80.|Boolean              |`true`/`false`               |
+|fileshares          |No    |Option for automated hosting of file shares.<br>The files in the `.\Fileshares\<Sharename>\*` folder will be shared. Via Group Policy, all workstations in the domain will connect to the specified file shares. Currently, it is not possible to create ACLs; all accounts have access to the hosted file shares.|fileshare[]          |See [fileshare](./cfg_fileshare.md)          |
+|mssqlserver         |No    |Option for automated hosting of an MSSQL server.<br>If specified: An MSSQL server instance will be hosted on port 1433. |mssqlserver          |See [mssqlserver](./cfg_mssqlserver.md)        |

@@ -1,15 +1,6 @@
-# Modul mssqlserver
+# mssqlserver module
 
-Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
-
-## Modulbeschreibung in Tabellenform
-
-|Parameter           |Required|Beschreibung                               |Datentyp             |Beispiel                 |
-|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
-|service_account     |Ja      |Account, mit dem das Service gestartet werden soll.<br>Der Accountname muss unter service_accounts hinterlegt sein.|String               |`"sqluser"`                |
-|service_administrator_accounts|Ja      |Accounts, die Admin-Berechtigungen erhalten sollen.<br>Die Accountnamen müssen als [user_account](./cfg_user_account.md) oder [service_account](./cfg_service_account.md) hinterlegt sein.|String[]             |`"alice", "sqluser"`       |
-
-## Modulbeschreibung im JSON-Format
+Take me back to the [base document](./cfg_root.md).
 
 ```json
 {
@@ -19,3 +10,8 @@ Hier geht's zurück zur [Dokumentation der Grundstruktur](./cfg_root.md).
     ]
 }
 ```
+
+|Parameter           |Required|Description                               |Data type             |Example                  |
+|--------------------|--------|-------------------------------------------|---------------------|-------------------------|
+|service_account     |Yes      |The account with which the service should be started.<br>The account name must be specified as [service_account](./cfg_service_account.md).|String               |`"sqluser"`                |
+|service_administrator_accounts|Yes      |Accounts that should receive admin permissions for the service.<br>The account names must be specified as [user_account](./cfg_user_account.md) or [service_account](./cfg_service_account.md).|String[]             |`"alice", "sqluser"`       |
